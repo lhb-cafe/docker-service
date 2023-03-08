@@ -1,7 +1,7 @@
 #!/bin/bash
 
 HOST_IP=192.168.100.253
-RWD=/root/myserver
+RWD=$(dirname "$(realpath "$0")")
 
 run_if_exist() {
 	[[ $(type -t $1) == function ]] && $1
