@@ -4,11 +4,8 @@ DOCKER_IMG=nginx
 
 DOCKER_RUN_ARGS="-p 80:80 \
 		 -p 443:443 \
-		 -v ${WD}/conf/nginx.conf:/etc/nginx/nginx.conf \
-		 -v ${WD}/conf/conf.d:/etc/nginx/conf.d \
-		 -v ${WD}/log:/var/log/nginx \
-		 -v ${WD}/html:/etc/nginx/html \
-		 -v ${WD}/certs:/etc/nginx/certs"
+		 -v ${WD}/nginx:/etc/nginx \
+		 -v ${WD}/log:/var/log/nginx"
 
 SERVICE_SHELL=/bin/bash
 
