@@ -16,23 +16,32 @@ reload_env() {
 	unset DOCKER_RUN_ARGS
 	unset DOCKER_IMG
 	unset SERVICE_SHELL
+	unset COMPOSE
 
 	. ${RWD}/${DOCKER_SERVICE}/env
 }
 
 start() {
 	run_if_exist pre_start
-	docker run -it -d --restart on-failure \
-		--name ${DOCKER_SERVICE} \
-		${DOCKER_RUN_ARGS} \
-		${DOCKER_IMG}
+	if [ "${COMPOSE}" == 1 ]; then
+		docker-compose -f ${RWD}/${DOCKER_SERVICE}/docker-compose.yml up -d
+	else
+		docker run -it -d --restart on-failure \
+			--name ${DOCKER_SERVICE} \
+			${DOCKER_RUN_ARGS} \
+			${DOCKER_IMG}
+	fi
 	run_if_exist post_start
 }
 
 stop() {
 	run_if_exist pre_stop
-	docker kill ${DOCKER_SERVICE}
-	docker rm ${DOCKER_SERVICE}
+	if [ "${COMPOSE}" == 1 ]; then
+		docker-compose -f ${RWD}/${DOCKER_SERVICE}/docker-compose.yml down
+	else
+		docker kill ${DOCKER_SERVICE}
+		docker rm ${DOCKER_SERVICE}
+	fi
 	run_if_exist post_stop
 }
 
@@ -89,6 +98,7 @@ DOCKER_SERVICE_LIST=(${DOCKER_SERVICES})
 
 for DOCKER_SERVICE in "${DOCKER_SERVICE_LIST[@]}"; do
 echo "${OP} docker serivce ${DOCKER_SERVICE}..."
+export DOCKER_SERVICE # so it is accessible by docker-compose
 reload_env
 case ${OP} in
 	start|stop|restart|status|init)
