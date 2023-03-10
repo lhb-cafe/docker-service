@@ -1,6 +1,5 @@
 #!/bin/bash
 
-HOST_IP=192.168.100.253
 RWD=$(dirname "$(realpath "$0")")
 
 run_if_exist() {
@@ -25,7 +24,6 @@ start() {
 	run_if_exist pre_start
 	docker run -it -d --restart on-failure \
 		--name ${DOCKER_SERVICE} \
-		-e HOST_IP=${HOST_IP} \
 		${DOCKER_RUN_ARGS} \
 		${DOCKER_IMG}
 	run_if_exist post_start
