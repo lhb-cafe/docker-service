@@ -1,2 +1,9 @@
 This project is created to manage my docker services.
 
+Submodule setup
+1. Clone the main docker service system
+        - git clone https://github.com/lhb-cafe/docker-service
+2. Init and pull the submodules
+        - git submodule init
+        - git submodule update
+
