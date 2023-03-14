@@ -2,6 +2,8 @@
 
 RWD=$(dirname "$(realpath "$0")")
 
+. ${RWD}/global_env
+
 run_if_exist() {
 	[[ $(type -t $1) == function ]] && $1
 }

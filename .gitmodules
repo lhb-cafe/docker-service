@@ -1,3 +1,6 @@
 [submodule "headscale"]
 	path = headscale
 	url = https://github.com/lhb-cafe/docker-headscale.git
+[submodule "derp"]
+	path = derp
+	url = https://github.com/lhb-cafe/docker-derp.git
