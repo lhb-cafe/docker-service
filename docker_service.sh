@@ -19,8 +19,14 @@ reload_env() {
 	unset DOCKER_IMG
 	unset SERVICE_SHELL
 	unset COMPOSE
+	unset SUBDOMAIN
 
 	. ${RWD}/${DOCKER_SERVICE}/env
+	if [ -n "${SUBDOMAIN}" ]; then
+		export HOST_NAME=${SUBDOMAIN}.${TLD}
+	else
+		export HOST_NAME=www.${TLD}
+	fi
 }
 
 start() {
