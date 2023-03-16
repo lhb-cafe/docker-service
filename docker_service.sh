@@ -70,8 +70,12 @@ status() {
 	return ${RUNNING}
 }
 
+log() {
+	docker logs --follow $DOCKER_SERVICE
+}
+
 help() {
-	echo "$0 init|start|stop|restart|enter|status [services]"
+	echo "$0 init|start|stop|restart|enter|status|log [services]"
 }
 
 OP=""
@@ -79,7 +83,7 @@ DOCKER_SERVICES=""
 
 for parameter in "$@"; do
 case $parameter in
-	start|stop|restart|init|enter|status)
+	start|stop|restart|init|enter|status|log)
 		OP=${parameter}
 		;;
 	all)
@@ -109,7 +113,7 @@ echo "${OP} docker serivce ${DOCKER_SERVICE}..."
 export DOCKER_SERVICE # so it is accessible by docker-compose
 reload_env
 case ${OP} in
-	start|stop|restart|status|init)
+	start|stop|restart|status|init|log)
 		${OP}
 		;;
 	enter)
