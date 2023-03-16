@@ -113,7 +113,7 @@ case ${OP} in
 		${OP}
 		;;
 	enter)
-		docker exec -it ${DOCKER_SERVICE} ${SERVICE_SHELL}
+		test -z ${SERVICE_SHELL} || docker exec -it ${DOCKER_SERVICE} ${SERVICE_SHELL}
 		;;
 	*)
 		help
