@@ -4,3 +4,6 @@
 [submodule "derp"]
 	path = derp
 	url = https://github.com/lhb-cafe/docker-derp.git
+[submodule "wordpress"]
+	path = wordpress
+	url = https://github.com/lhb-cafe/docker-wordpress.git
