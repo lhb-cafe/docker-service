@@ -1,0 +1,13 @@
+version: '2.0'
+
+services:
+    nginx:
+        image: 'nginxproxy/nginx-proxy'
+        container_name: ${DOCKER_SERVICE} 
+        restart: always
+        ports:
+          - '80:80'
+          - '443:443'
+        volumes:
+          - /var/run/docker.sock:/tmp/docker.sock:ro
+          - ./certs/:/etc/nginx/certs/:ro
