@@ -1,1 +1,1 @@
-TLD="lhb.cafe"
+export TLD="lhb.cafe"
